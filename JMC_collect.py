@@ -12,7 +12,7 @@ parser.add_argument('--issue',  help='issue',      dest='issue',  required=True)
 parser.add_argument('--vol',    help='vol',        dest='vol',    required=True)
 parser.add_argument('--update', help='is update?', dest='update', default=True, type=str2bool)
 
-def GetInfo(issue, vol, driver, driver, logger, start):
+def GetInfo(issue, vol, driver, logger, start):
     driver.get(f'https://pubs.acs.org/toc/jmcmar/{issue}/{vol}')
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
