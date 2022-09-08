@@ -55,7 +55,7 @@ def main(iss_l, vol_l, iss_b, vol_b, is_update):
                 else:
                     shows += sorted(set(zip([iss] * 24 , range(24, 0, -1))), reverse=True)
         else:
-            for iss in range(iss_l, iss_b - 1, -1):
+            for iss in range(iss_l, (iss_b - 1), -1):
                 if iss == iss_l:
                     shows += sorted(set(zip([iss_l] * vol_l , range(vol_l, 0, -1))), reverse=True)
                 elif iss == iss_b:
@@ -83,6 +83,6 @@ if __name__ == '__main__':
             vol_b = temp['vol']
         f.close()
     else:
-        iss_b = 52,
+        iss_b = 53,
         vol_b = 1
     main(args.issue, args.vol, iss_b, vol_b, args.update)
