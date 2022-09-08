@@ -4,21 +4,24 @@ import time
 from argparse import ArgumentParser
 from utils import getdriver, getlog, str2bool
 
-parser = ArgumentParser(description = 'Collect JMC')
-parser.add_argument('--issue',  help='issue',      dest='issue',  required=True, type=int)
+parser = ArgumentParser(description = 'Collect EJMC')
 parser.add_argument('--vol',    help='vol',        dest='vol',    required=True, type=int)
 parser.add_argument('--update', help='is update?', dest='update', default=True, type=str2bool)
 
 def GetInfo(issue, vol, driver, logger, start):
-    driver.get(f'https://pubs.acs.org/toc/jmcmar/{issue}/{vol}')
+    
+    driver.get(f'https://www.sciencedirect.com/journal/european-journal-of-medicinal-chemistry/vol/{vol}/suppl/C')
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
     
+    publish = soup.select('#react-root > div > div > div > main > section:nth-child(2) > div > div > div > h3')[0].text
+    
+    if 'In progress' in publish:
+        return []
+
     res = list()
     if start:
-        publish = soup.select('#pb-page-content > div > main > div.niHeader > div > div > div > div.niHeader_left.pull-left > div.niHeader_about.pull-left > div.niHeader_about-flex > div.niHeader_about-meta > span:nth-child(1)')[0].text.split(' ')
-        res.append({'month' : publish[0], 'year' : publish[2]})
-
+        
     for i in range(100):
         try:
             title = soup.select(f'#pb-page-content > div > main > div:nth-child(3) > div > div:nth-child({i}) > div.issue-item_metadata > span > h5 > a')
