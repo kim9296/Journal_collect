@@ -11,10 +11,10 @@ parser.add_argument('--vol',    help='vol',        dest='vol',    required=True,
 parser.add_argument('--update', help='is update?', dest='update', default=True, type=str2bool)
 
 def GetInfo(issue, vol, driver, logger, start):
-    driver.get(f'https://pubs.acs.org/toc/jmcmar/{issue}/{vol}')
+    driver.get(f'https://pubs.acs.org/toc/amclct/{issue}/{vol}')
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
-    
+      
     res = list()
     if start:
         publish = soup.select('#pb-page-content > div > main > div.niHeader > div > div > div > div.niHeader_left.pull-left > div.niHeader_about.pull-left > div.niHeader_about-flex > div.niHeader_about-meta > span:nth-child(1)')[0].text.split(' ')
