@@ -19,8 +19,8 @@ def GetInfo(issue, vol, driver, driver, logger, start):
     
     res = list()
     if start:
-        pass 
-        #TODO
+        publish = soup.select('#pb-page-content > div > main > div.niHeader > div > div > div > div.niHeader_left.pull-left > div.niHeader_about.pull-left > div.niHeader_about-flex > div.niHeader_about-meta > span:nth-child(1)')[0].text.split(' ')
+        res.append('month' : publish[0], 'year' : publish[2])
 
     for i in range(100):
         try:
@@ -72,7 +72,7 @@ def main(iss_l, vol_l, iss_b, vol_b, is_update):
         csv = [x for x in os.listdir('.') if 'JMC_' in x][0]
         df = pd.read_csv(csv)
     else:
-        pd.DataFrame(res).to_csv('JMC_201001to202208.csv', index = False)
+        pd.DataFrame(total_res).to_csv('JMC_201001to202208.csv', index = False)
 
 if __name__ == '__main__':
     args = parser.parse_args()
