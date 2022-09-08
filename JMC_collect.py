@@ -70,7 +70,7 @@ def main(iss_l, vol_l, iss_b, vol_b, is_update):
         csv = [x for x in os.listdir('.') if 'JMC_' in x][0]
         df = pd.read_csv(csv)
     else:
-        pd.DataFrame(total_res).to_csv('JMC_201001to202208.csv', index = False)
+        pd.DataFrame(total_res[1:]).to_csv('JMC_201001to202208.csv', index = False)
 
 if __name__ == '__main__':
     args = parser.parse_args()
