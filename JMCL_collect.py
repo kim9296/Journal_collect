@@ -100,6 +100,6 @@ if __name__ == '__main__':
             vol_b = temp['vol']
         f.close()
     else:
-        iss_b = 11
+        iss_b = 1
         vol_b = 1
     main(args.issue, args.vol, iss_b, vol_b, args.update)
