@@ -1,8 +1,9 @@
+import json
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
 from argparse import ArgumentParser
-from utils import getdriver, getlog, str2bool
+from utils import getdriver, getlog, str2bool, Months
 
 parser = ArgumentParser(description = 'Collect JMC')
 parser.add_argument('--issue',  help='issue',      dest='issue',  required=True, type=int)
@@ -66,11 +67,25 @@ def main(iss_l, vol_l, iss_b, vol_b, is_update):
         total_res += GetInfo(issue, vol, driver, logger, start)
         start = False
 
+    month = Months[total_res[0]['month']]
+    year  = total_res[0]['year']
+    csvname = 'JMC_201001to{}.csv'.format(year+month)
+
     if is_update:
         csv = [x for x in os.listdir('.') if 'JMC_' in x][0]
-        df = pd.read_csv(csv)
+        df_b = pd.read_csv(csv)
+        df_l = pd.DataFrame(total_res[1:])
+        df = pd.concat([df_l, df_b])
     else:
-        pd.DataFrame(total_res[1:]).to_csv('JMC_201001to202208.csv', index = False)
+        df = pd.DataFrame(total_res[1:])
+    
+    df.to_csv(csvname, index = False)
+    
+    save = {'issue' : iss_l, 'vol' : vol_l}
+    with open('JMC.json', 'w') as f:
+        json.dump(save, f, indent=4)
+    f.close()
+
 
 if __name__ == '__main__':
     args = parser.parse_args()

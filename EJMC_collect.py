@@ -1,3 +1,4 @@
+from turtle import pu
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
@@ -21,10 +22,11 @@ def GetInfo(issue, vol, driver, logger, start):
 
     res = list()
     if start:
-        
+        publish = publish.split(' ')
+        res.append({'month' : publish[1], 'year' : publish[2]})
     for i in range(100):
         try:
-            title = soup.select(f'#pb-page-content > div > main > div:nth-child(3) > div > div:nth-child({i}) > div.issue-item_metadata > span > h5 > a')
+            title = soup.select(f'#S0223523422005700 > span > span')
             abstract = soup.select(f'#pb-page-content > div > main > div:nth-child(3) > div > div:nth-child({i}) > div.issue-item_metadata > div.issue-item_footer > div > div > span > p') 
             res.append({'title': title[0].text, 'issue' : issue, 'vol' : vol, 'abstract' : abstract[0].text, 'doi' : title[0].get('id')})
         except:
