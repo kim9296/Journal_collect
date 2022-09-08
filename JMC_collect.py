@@ -37,10 +37,11 @@ def GetInfo(issue, vol, driver, logger, start):
     return res
 
 def main(iss_l, vol_l, iss_b, vol_b, is_update):          
-      
+    
     total_res = list()
     driver = getdriver()
     logger = getlog()
+    logger.info(iss_l ,iss_b, vol_l, vol_b)
     if iss_l == iss_b:
         if vol_l == vol_b:
             raise Exception ('updated already')
