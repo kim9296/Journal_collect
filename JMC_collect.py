@@ -41,7 +41,7 @@ def main(iss_l, vol_l, iss_b, vol_b, is_update):
     total_res = list()
     driver = getdriver()
     logger = getlog()
-    logger.info(iss_l ,iss_b, vol_l, vol_b)
+    
     if iss_l == iss_b:
         if vol_l == vol_b:
             raise Exception ('updated already')
@@ -84,6 +84,6 @@ if __name__ == '__main__':
             vol_b = temp['vol']
         f.close()
     else:
-        iss_b = 53,
+        iss_b = 53
         vol_b = 1
     main(args.issue, args.vol, iss_b, vol_b, args.update)
