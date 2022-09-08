@@ -73,7 +73,7 @@ def main(iss_l, vol_l, iss_b, vol_b, is_update):
 
     month = Months[total_res[0]['month']]
     year  = total_res[0]['year']
-    csvname = 'JMC_201001to{}.csv'.format(year+month)
+    csvname = 'JMCL_201001to{}.csv'.format(year+month)
 
     if is_update:
         csv = [x for x in os.listdir('.') if 'JMC_' in x][0]
@@ -86,7 +86,7 @@ def main(iss_l, vol_l, iss_b, vol_b, is_update):
     df.to_csv(csvname, index = False)
     
     save = {'issue' : iss_l, 'vol' : vol_l}
-    with open('JMC.json', 'w') as f:
+    with open('JMCL.json', 'w') as f:
         json.dump(save, f, indent=4)
     f.close()
 
@@ -94,7 +94,7 @@ def main(iss_l, vol_l, iss_b, vol_b, is_update):
 if __name__ == '__main__':
     args = parser.parse_args()
     if args.update:
-        with open('JMC.json', 'r') as f:
+        with open('JMCL.json', 'r') as f:
             temp = json.load(f)
             iss_b = temp['issue']
             vol_b = temp['vol']
