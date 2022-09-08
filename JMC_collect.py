@@ -8,8 +8,8 @@ from argparse import ArgumentParser
 from utils import getdriver, getlog, str2bool
 
 parser = ArgumentParser(description = 'Collect JMC')
-parser.add_argument('--issue',  help='issue',      dest='issue',  required=True)
-parser.add_argument('--vol',    help='vol',        dest='vol',    required=True)
+parser.add_argument('--issue',  help='issue',      dest='issue',  required=True, type=int)
+parser.add_argument('--vol',    help='vol',        dest='vol',    required=True, type=int)
 parser.add_argument('--update', help='is update?', dest='update', default=True, type=str2bool)
 
 def GetInfo(issue, vol, driver, logger, start):
