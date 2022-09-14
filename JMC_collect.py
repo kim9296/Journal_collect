@@ -2,6 +2,7 @@ import json
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
+import os
 from argparse import ArgumentParser
 from utils import getdriver, getlog, str2bool, Months
 

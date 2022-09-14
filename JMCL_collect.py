@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import time
 from argparse import ArgumentParser
+import os
 from utils import getdriver, getlog, str2bool, Months
 
 parser = ArgumentParser(description = 'Collect JMCL')
@@ -76,7 +77,7 @@ def main(iss_l, vol_l, iss_b, vol_b, is_update):
     csvname = 'JMCL_201001to{}.csv'.format(year+month)
 
     if is_update:
-        csv = [x for x in os.listdir('.') if 'JMC_' in x][0]
+        csv = [x for x in os.listdir('.') if 'JMCL_' in x][0]
         df_b = pd.read_csv(csv)
         df_l = pd.DataFrame(total_res[1:])
         df = pd.concat([df_l, df_b])
